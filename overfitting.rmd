@@ -64,3 +64,7 @@ dat %>% ggplot(aes(x = x, y = y))  +
                          labels = c("Linear", "Cubic", "Degree-15 Polynomial", "Quadratic"))
 ```
 
+```{r}
+knitr::include_app("https://pvossler.shinyapps.io/polynomials_plot/", height = "600px")
+```
+
