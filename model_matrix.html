@@ -1,0 +1,315 @@
+---
+author: ""
+slug: "modelmatrix"
+date: 2021-01-01
+title: "Regression with a Categorical Variable with multiple levels: Behind the Scenes"
+output:
+  html_document:
+    code_folding: hide
+---
+
+<script src="/buad_312_office_hour_info/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/buad_312_office_hour_info/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/buad_312_office_hour_info/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<p><br><br></p>
+<pre class="r"><code>fit3 &lt;- lm(review_scores_rating ~ room_type , data = airbnb)
+fit3 %&gt;% get_regression_table() %&gt;% knitr::kable() %&gt;% kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std_error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p_value
+</th>
+<th style="text-align:right;">
+lower_ci
+</th>
+<th style="text-align:right;">
+upper_ci
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+intercept
+</td>
+<td style="text-align:right;">
+93.202
+</td>
+<td style="text-align:right;">
+0.137
+</td>
+<td style="text-align:right;">
+680.602
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+92.934
+</td>
+<td style="text-align:right;">
+93.471
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+room_typeHotel room
+</td>
+<td style="text-align:right;">
+-4.448
+</td>
+<td style="text-align:right;">
+0.667
+</td>
+<td style="text-align:right;">
+-6.666
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-5.755
+</td>
+<td style="text-align:right;">
+-3.140
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+room_typePrivate room
+</td>
+<td style="text-align:right;">
+0.930
+</td>
+<td style="text-align:right;">
+0.197
+</td>
+<td style="text-align:right;">
+4.723
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.544
+</td>
+<td style="text-align:right;">
+1.316
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+room_typeShared room
+</td>
+<td style="text-align:right;">
+-4.276
+</td>
+<td style="text-align:right;">
+0.465
+</td>
+<td style="text-align:right;">
+-9.203
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-5.186
+</td>
+<td style="text-align:right;">
+-3.365
+</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<pre class="r"><code>kable(
+    list(
+        model.matrix(fit3) %&gt;% head(),
+        airbnb %&gt;% select(room_type) %&gt;% head()
+    ),
+    caption = &quot;R&#39;s representation of categorical variables vs. what we see in the data&quot;,
+    valign = &#39;t&#39;
+) %&gt;% kable_styling()</code></pre>
+<table class="kable_wrapper table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-2">Table 1: </span>R’s representation of categorical variables vs. what we see in the data
+</caption>
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+(Intercept)
+</th>
+<th style="text-align:right;">
+room_typeHotel room
+</th>
+<th style="text-align:right;">
+room_typePrivate room
+</th>
+<th style="text-align:right;">
+room_typeShared room
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+room_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Private room
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Entire home/apt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Private room
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Private room
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Entire home/apt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Entire home/apt
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<div id="four-cases" class="section level3">
+<h3>Four cases</h3>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\hat{f}(\text{entire home}) = \hat{\beta}_{0} + 0 + 0 + 0\)</span></li>
+<li><span class="math inline">\(\hat{f}(\text{hotel}) = \hat{\beta}_{0} + \hat{\beta}_{\text{hotel}} \cdot 1 + 0 + 0\)</span></li>
+<li><span class="math inline">\(\hat{f}(\text{private}) = \hat{\beta}_{0} + 0 + \hat{\beta}_{\text{private}} \cdot 1 + 0\)</span></li>
+<li><span class="math inline">\(\hat{f}(\text{shared}) = \hat{\beta}_{0} + 0 + 0 + \hat{\beta}_{\text{shared}} \cdot 1\)</span></li>
+</ol>
+</div>

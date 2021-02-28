@@ -1,0 +1,45 @@
+---
+author: ""
+slug: "modelmatrix"
+date: 2021-01-01
+title: "Regression with a Categorical Variable with multiple levels: Behind the Scenes"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+
+library(moderndive)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+
+load("airbnb.rda")
+```
+
+<br><br>
+```{r}
+fit3 <- lm(review_scores_rating ~ room_type , data = airbnb)
+fit3 %>% get_regression_table() %>% knitr::kable() %>% kable_styling()
+```
+<br><br>
+```{r}
+kable(
+    list(
+        model.matrix(fit3) %>% head(),
+        airbnb %>% select(room_type) %>% head()
+    ),
+    caption = "R's representation of categorical variables vs. what we see in the data",
+    valign = 't'
+) %>% kable_styling()
+
+```
+
+### Four cases
+
+1. $\hat{f}(\text{entire home}) = \hat{\beta}_{0} + 0 + 0 + 0$
+2. $\hat{f}(\text{hotel}) = \hat{\beta}_{0} + \hat{\beta}_{\text{hotel}} \cdot 1 + 0 + 0$
+3. $\hat{f}(\text{private}) = \hat{\beta}_{0} + 0 + \hat{\beta}_{\text{private}} \cdot 1 + 0$
+4. $\hat{f}(\text{shared}) = \hat{\beta}_{0} + 0 + 0 + \hat{\beta}_{\text{shared}} \cdot 1$

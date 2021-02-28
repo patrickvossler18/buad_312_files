@@ -1,0 +1,75 @@
+---
+author: ""
+slug: "3dplot"
+date: 2021-01-01
+title: "3d plot"
+output:
+  html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+
+library(plotly)
+library(moderndive)
+
+load("airbnb.rda")
+```
+
+
+```{r}
+make_3dplot <- function(dat, with_plane = FALSE) {
+  p <- dat %>%
+    plot_ly(x = ~review_scores_cleanliness,
+            y = ~review_scores_location,
+            z = ~review_scores_rating,
+            size = 2) %>%
+    add_markers() %>%
+    layout(scene = list(xaxis = list(title = "Cleanliness"),
+                        yaxis = list(title = "Location"),
+                        zaxis = list(title = "Rating")))
+  if (!with_plane) return(p)
+  lm_surf <- lm(review_scores_rating ~ review_scores_cleanliness + review_scores_location,
+                data = dat) %>%
+    get_regression_points(newdata = expand.grid(review_scores_cleanliness = 2:10,
+                                                review_scores_location = 2:10))
+  p %>%
+    add_trace(x = lm_surf$review_scores_cleanliness,
+              y = lm_surf$review_scores_location,
+              z = lm_surf$review_scores_rating_hat,
+              type = "mesh3d")
+}
+```
+
+
+### Without Regression Plane
+<details>
+  <summary>
+  Expand me!
+  </summary>
+<p>
+
+```{r}
+make_3dplot(airbnb)
+```
+
+
+</p>
+</details>
+
+
+<br><br><br>
+
+<h3>With Regression Plane</h3>
+<details><summary>Expand me!</summary>
+<p>
+
+```{r}
+make_3dplot(airbnb, with_plane = TRUE)
+```
+
+
+</p>
+</details>
+
+
