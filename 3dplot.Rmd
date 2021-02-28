@@ -1,10 +1,8 @@
 ---
-author: ""
-slug: "3dplot"
-date: 2021-01-01
-title: "3d plot"
+title: "3d regression plot"
 output:
-  html_document
+  html_document:
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}

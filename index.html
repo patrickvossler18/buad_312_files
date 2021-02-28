@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="BUAD 312" />
 
 
-<title>Regression with a Categorical Variable with multiple levels: Behind the Scenes</title>
+<title>BUAD 312 Miscellaneous Files</title>
 
 <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -21,11 +22,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -259,9 +257,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -304,321 +299,16 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
 
 
-
-<h1 class="title toc-ignore">Regression with a Categorical Variable with multiple levels: Behind the Scenes</h1>
+<h1 class="title toc-ignore">BUAD 312 Miscellaneous Files</h1>
+<h4 class="author">BUAD 312</h4>
 
 </div>
 
 
-<p><br><br></p>
-<pre class="r"><code>fit3 &lt;- lm(review_scores_rating ~ room_type , data = airbnb)
-fit3 %&gt;% get_regression_table() %&gt;% knitr::kable() %&gt;% kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std_error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p_value
-</th>
-<th style="text-align:right;">
-lower_ci
-</th>
-<th style="text-align:right;">
-upper_ci
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-intercept
-</td>
-<td style="text-align:right;">
-93.202
-</td>
-<td style="text-align:right;">
-0.137
-</td>
-<td style="text-align:right;">
-680.602
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-92.934
-</td>
-<td style="text-align:right;">
-93.471
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-room_typeHotel room
-</td>
-<td style="text-align:right;">
--4.448
-</td>
-<td style="text-align:right;">
-0.667
-</td>
-<td style="text-align:right;">
--6.666
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
--5.755
-</td>
-<td style="text-align:right;">
--3.140
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-room_typePrivate room
-</td>
-<td style="text-align:right;">
-0.930
-</td>
-<td style="text-align:right;">
-0.197
-</td>
-<td style="text-align:right;">
-4.723
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0.544
-</td>
-<td style="text-align:right;">
-1.316
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-room_typeShared room
-</td>
-<td style="text-align:right;">
--4.276
-</td>
-<td style="text-align:right;">
-0.465
-</td>
-<td style="text-align:right;">
--9.203
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
--5.186
-</td>
-<td style="text-align:right;">
--3.365
-</td>
-</tr>
-</tbody>
-</table>
-<p><br><br></p>
-<pre class="r"><code>kable(
-    list(
-        model.matrix(fit3) %&gt;% head(),
-        airbnb %&gt;% select(room_type) %&gt;% head()
-    ),
-    caption = &quot;R&#39;s representation of categorical variables vs. what we see in the data&quot;,
-    valign = &#39;t&#39;
-) %&gt;% kable_styling()</code></pre>
-<table class="kable_wrapper table" style="margin-left: auto; margin-right: auto;">
-<caption>
-R’s representation of categorical variables vs. what we see in the data
-</caption>
-<tbody>
-<tr>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-(Intercept)
-</th>
-<th style="text-align:right;">
-room_typeHotel room
-</th>
-<th style="text-align:right;">
-room_typePrivate room
-</th>
-<th style="text-align:right;">
-room_typeShared room
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-room_type
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Private room
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Entire home/apt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Private room
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Private room
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Entire home/apt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Entire home/apt
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-<div id="four-cases" class="section level3">
-<h3>Four cases</h3>
-<ol style="list-style-type: decimal">
-<li><span class="math inline">\(\hat{f}(\text{entire home}) = \hat{\beta}_{0} + 0 + 0 + 0\)</span></li>
-<li><span class="math inline">\(\hat{f}(\text{hotel}) = \hat{\beta}_{0} + \hat{\beta}_{\text{hotel}} \cdot 1 + 0 + 0\)</span></li>
-<li><span class="math inline">\(\hat{f}(\text{private}) = \hat{\beta}_{0} + 0 + \hat{\beta}_{\text{private}} \cdot 1 + 0\)</span></li>
-<li><span class="math inline">\(\hat{f}(\text{shared}) = \hat{\beta}_{0} + 0 + 0 + \hat{\beta}_{\text{shared}} \cdot 1\)</span></li>
-</ol>
-</div>
+<hr />
+<p>Hello, this website hosts some RMarkdown files for BUAD 312.</p>
 
 
 
@@ -653,11 +343,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

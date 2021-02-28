@@ -1,0 +1,9 @@
+---
+title: "BUAD 312 Miscellaneous Files"
+author: "BUAD 312"
+output: html_document
+---
+
+----
+
+Hello, this website hosts some RMarkdown files for BUAD 312.

@@ -1,0 +1,13 @@
+name: "BUAD 312 Files"
+navbar:
+  title: "HOME"
+  left:
+    - text: "3d Regression Plot"
+      href: 3dplot.html
+    - text: "Regression with a Categorical Variable: Behind the Scenes"
+      href: model_matrix.html
+output_dir: "."
+output:
+  html_document:
+    theme: yeti
+    highlight: textmate

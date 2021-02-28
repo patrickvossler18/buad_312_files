@@ -1,7 +1,4 @@
 ---
-author: ""
-slug: "modelmatrix"
-date: 2021-01-01
 title: "Regression with a Categorical Variable with multiple levels: Behind the Scenes"
 output:
   html_document:
