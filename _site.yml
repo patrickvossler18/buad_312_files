@@ -6,6 +6,9 @@ navbar:
       href: 3dplot.html
     - text: "Regression with a Categorical Variable: Behind the Scenes"
       href: model_matrix.html
+    - text: "Overfitting Plots"
+      href: overfitting.html
+
 output_dir: "."
 output:
   html_document:
