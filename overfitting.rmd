@@ -15,13 +15,13 @@ library(tidyverse)
 true_fun <- function(x){
     cos(1.5 * pi * x)
 }
-    set.seed(1234)
+set.seed(12345)
 
-n_samples <- 50
+n_samples <- 21
 
 
 x <- runif(n_samples)
-y <- true_fun(x) + runif(n_samples) * 0.1
+y <- true_fun(x) + runif(n_samples) * 0.12
 dat <- tibble(x = x, y = y)
 ```
 
@@ -38,30 +38,30 @@ dat %>% ggplot(aes(x = x, y = y))  +
 ```
 
 
-```{r, message=F}
+```{r, message=F, warning = F}
 dat %>% ggplot(aes(x = x, y = y))  + 
     geom_smooth(method = "lm", se = F, aes(color = "black"))+
     geom_smooth(method = "lm",formula = y ~ poly(x,3), se = F, aes(color = "red"))+
-    geom_smooth(method = "lm",formula = y ~ poly(x,15), se = F, aes(color = "green"))+
+    geom_smooth(method = "lm",formula = y ~ poly(x,20, raw = T), se = F, aes(color = "green"))+
     geom_point() +
     scale_color_identity(guide = "legend",
                          name = "Model Type",
                          breaks = c("black", "red", "green"),
-                         labels = c("Linear", "Cubic", "Degree-15 Polynomial"))
+                         labels = c("Linear", "Cubic", "20-order Polynomial"))
 
 ```
 
-```{r, message=F}
+```{r, message=F, warning= F}
 dat %>% ggplot(aes(x = x, y = y))  + 
     geom_smooth(method = "lm", se = F, aes(color = "black"))+
     geom_smooth(method = "lm",formula = y ~ poly(x,3), se = F, aes(color = "red"))+
-    geom_smooth(method = "lm",formula = y ~ poly(x,15), se = F, aes(color = "green"))+
+    geom_smooth(method = "lm",formula = y ~ poly(x,20, raw = T), se = F, aes(color = "green"))+
     geom_smooth(method = "lm",formula = y ~ poly(x,2), se = F, aes(color = "orange"))+
     geom_point() +
     scale_color_identity(guide = "legend",
                          name = "Model Type",
                          breaks = c("black", "red", "green", "orange"),
-                         labels = c("Linear", "Cubic", "Degree-15 Polynomial", "Quadratic"))
+                         labels = c("Linear", "Cubic", "20-order Polynomial", "Quadratic"))
 ```
 
 ```{r}

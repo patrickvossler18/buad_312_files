@@ -324,13 +324,13 @@ $(document).ready(function () {
 true_fun &lt;- function(x){
     cos(1.5 * pi * x)
 }
-    set.seed(1234)
+set.seed(12345)
 
-n_samples &lt;- 50
+n_samples &lt;- 21
 
 
 x &lt;- runif(n_samples)
-y &lt;- true_fun(x) + runif(n_samples) * 0.1
+y &lt;- true_fun(x) + runif(n_samples) * 0.12
 dat &lt;- tibble(x = x, y = y)</code></pre>
 <pre class="r"><code>dat %&gt;% ggplot(aes(x = x, y = y))  + 
     geom_smooth(method = &quot;lm&quot;, se = F, aes(color = &quot;black&quot;))+
@@ -344,23 +344,23 @@ dat &lt;- tibble(x = x, y = y)</code></pre>
 <pre class="r"><code>dat %&gt;% ggplot(aes(x = x, y = y))  + 
     geom_smooth(method = &quot;lm&quot;, se = F, aes(color = &quot;black&quot;))+
     geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,3), se = F, aes(color = &quot;red&quot;))+
-    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,15), se = F, aes(color = &quot;green&quot;))+
+    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,20, raw = T), se = F, aes(color = &quot;green&quot;))+
     geom_point() +
     scale_color_identity(guide = &quot;legend&quot;,
                          name = &quot;Model Type&quot;,
                          breaks = c(&quot;black&quot;, &quot;red&quot;, &quot;green&quot;),
-                         labels = c(&quot;Linear&quot;, &quot;Cubic&quot;, &quot;Degree-15 Polynomial&quot;))</code></pre>
+                         labels = c(&quot;Linear&quot;, &quot;Cubic&quot;, &quot;20-order Polynomial&quot;))</code></pre>
 <p><img src="overfitting_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>dat %&gt;% ggplot(aes(x = x, y = y))  + 
     geom_smooth(method = &quot;lm&quot;, se = F, aes(color = &quot;black&quot;))+
     geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,3), se = F, aes(color = &quot;red&quot;))+
-    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,15), se = F, aes(color = &quot;green&quot;))+
+    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,20, raw = T), se = F, aes(color = &quot;green&quot;))+
     geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,2), se = F, aes(color = &quot;orange&quot;))+
     geom_point() +
     scale_color_identity(guide = &quot;legend&quot;,
                          name = &quot;Model Type&quot;,
                          breaks = c(&quot;black&quot;, &quot;red&quot;, &quot;green&quot;, &quot;orange&quot;),
-                         labels = c(&quot;Linear&quot;, &quot;Cubic&quot;, &quot;Degree-15 Polynomial&quot;, &quot;Quadratic&quot;))</code></pre>
+                         labels = c(&quot;Linear&quot;, &quot;Cubic&quot;, &quot;20-order Polynomial&quot;, &quot;Quadratic&quot;))</code></pre>
 <p><img src="overfitting_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <pre class="r"><code>knitr::include_app(&quot;https://pvossler.shinyapps.io/polynomials_plot/&quot;, height = &quot;600px&quot;)</code></pre>
 <iframe src="https://pvossler.shinyapps.io/polynomials_plot/?showcase=0" width="672" height="600px">
