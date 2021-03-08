@@ -8,6 +8,8 @@ navbar:
       href: model_matrix.html
     - text: "Overfitting Plots"
       href: overfitting.html
+    - text: "Recreating the Nightingale Rose Diagram"
+      href: nightingale.html
 
 output_dir: "."
 output:

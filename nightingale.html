@@ -12,7 +12,7 @@
 <meta name="author" content="BUAD 312" />
 
 
-<title>BUAD 312 Miscellaneous Files</title>
+<title>Recreating the Nightingale Rose Diagram</title>
 
 <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -307,14 +307,78 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">BUAD 312 Miscellaneous Files</h1>
+<h1 class="title toc-ignore">Recreating the Nightingale Rose Diagram</h1>
 <h4 class="author">BUAD 312</h4>
+<h4 class="date">3/7/2021</h4>
 
 </div>
 
 
-<hr />
-<p>Hello, this website hosts some RMarkdown files for BUAD 312.</p>
+<pre class="r"><code>library(tidyverse)
+library(jsonlite)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;jsonlite&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     flatten</code></pre>
+<pre class="r"><code>library(lubridate)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<pre class="r"><code>library(buad312data)</code></pre>
+<p>Modern method for displaying one numeric and one categorical variables over time</p>
+<pre class="r"><code>nightingale %&gt;% ggplot(aes(x = date, y = number_of_deaths, fill = cause_of_death)) +
+    geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
+    scale_x_date(date_breaks = &quot;1 month&quot;) +
+    theme(axis.text.x=element_text(angle = -45, hjust = 0)) +
+    geom_vline(xintercept = ymd(&quot;1855-04-01&quot;), color = &quot;red&quot;) +
+    geom_vline(xintercept = ymd(&quot;1854-11-01&quot;), color = &quot;blue&quot;) +
+    annotate(&quot;text&quot;,x=ymd(&quot;1855-04-01&quot;), label=&quot;The sanitation committee arrives&quot;, y=500, color = &quot;red&quot;, vjust = -1, hjust = -0.05)+
+    annotate(&quot;text&quot;,x=ymd(&quot;1854-11-01&quot;), label=&quot;Nightingale arrives&quot;, y=500, color = &quot;blue&quot;, vjust = -1, hjust = 1.1)</code></pre>
+<p><img src="nightingale_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div id="recreating-nightingales-rose-diagrams-using-ggplot2s-coord_polar-function." class="section level2">
+<h2>Recreating Nightingale’s rose diagrams using ggplot2’s <code>coord_polar()</code> function.</h2>
+<div id="before-april-1855" class="section level3">
+<h3>Before April 1855</h3>
+<pre class="r"><code>nightingale %&gt;%
+    filter(date &lt; ymd(&quot;1855-04-01&quot;)) %&gt;%
+    mutate(date = forcats::as_factor(strftime(date,&quot;%b-%Y&quot;))) %&gt;%  
+    ggplot(aes(x = date, y = number_of_deaths, fill = cause_of_death)) +
+    geom_bar(stat=&quot;identity&quot;,width=1,colour=&quot;black&quot;,size=0.1)+
+    coord_polar( start = -pi/2)</code></pre>
+<p><img src="nightingale_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="after-april-1855" class="section level3">
+<h3>After April 1855</h3>
+<pre class="r"><code>nightingale %&gt;%
+    filter(date &gt;= ymd(&quot;1855-04-01&quot;)) %&gt;%
+    mutate(date = forcats::as_factor(strftime(date,&quot;%b-%Y&quot;))) %&gt;% 
+    ggplot(aes(x = date, y = number_of_deaths, fill = cause_of_death)) +
+    geom_bar(stat=&quot;identity&quot;,width=1,colour=&quot;black&quot;,size=0.1)+
+    coord_polar( start = -pi/2)</code></pre>
+<p><img src="nightingale_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>With out the y-axis, it is hard to compare the magnitudes. Let’s put the plots side-by-side with the same y-axis range.</p>
+</div>
+<div id="rose-diagram-side-by-side" class="section level3">
+<h3>Rose Diagram Side-by-side</h3>
+<pre class="r"><code>avg_annual_mort &lt;- nightingale %&gt;%
+    mutate(
+    before = ifelse(date &lt; ymd(&quot;1855-04-01&quot;), &quot;Before the sanitation committee arrived&quot;, &quot;After the sanitation committee arrived&quot;),
+    date = forcats::as_factor(strftime(date,&quot;%b-%Y&quot;)))
+
+
+
+avg_annual_mort %&gt;%
+    ggplot(aes(x = date, y = number_of_deaths, fill = cause_of_death, group = before)) +
+    geom_bar(stat=&quot;identity&quot;,width=1,colour=&quot;black&quot;,size=0.1)+
+    coord_polar( start = -pi/2) +
+    facet_wrap(~before) +
+    labs(x = &quot;&quot;, y = &quot;&quot;)</code></pre>
+<p><img src="nightingale_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+</div>
 
 
 
