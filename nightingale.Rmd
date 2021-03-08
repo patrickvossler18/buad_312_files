@@ -2,14 +2,16 @@
 title: "Recreating the Nightingale Rose Diagram"
 author: "BUAD 312"
 date: "3/7/2021"
-output: html_document
+output:
+  html_document:
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, message=FALSE}
 library(tidyverse)
 library(jsonlite)
 library(lubridate)
@@ -56,7 +58,7 @@ nightingale %>%
 With out the y-axis, it is hard to compare the magnitudes. Let's put the plots side-by-side with the same y-axis range.
 
 ### Rose Diagram Side-by-side
-```{r}
+```{r,fig.width=12, fig.height=8}
 avg_annual_mort <- nightingale %>%
     mutate(
     before = ifelse(date < ymd("1855-04-01"), "Before the sanitation committee arrived", "After the sanitation committee arrived"),

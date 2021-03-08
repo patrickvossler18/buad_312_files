@@ -22,6 +22,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -257,6 +258,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -305,6 +309,14 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Recreating the Nightingale Rose Diagram</h1>
@@ -315,19 +327,9 @@ $(document).ready(function () {
 
 
 <pre class="r"><code>library(tidyverse)
-library(jsonlite)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;jsonlite&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     flatten</code></pre>
-<pre class="r"><code>library(lubridate)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     date, intersect, setdiff, union</code></pre>
-<pre class="r"><code>library(buad312data)</code></pre>
+library(jsonlite)
+library(lubridate)
+library(buad312data)</code></pre>
 <p>Modern method for displaying one numeric and one categorical variables over time</p>
 <pre class="r"><code>nightingale %&gt;% ggplot(aes(x = date, y = number_of_deaths, fill = cause_of_death)) +
     geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
@@ -376,7 +378,7 @@ avg_annual_mort %&gt;%
     coord_polar( start = -pi/2) +
     facet_wrap(~before) +
     labs(x = &quot;&quot;, y = &quot;&quot;)</code></pre>
-<p><img src="nightingale_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="nightingale_files/figure-html/unnamed-chunk-5-1.png" width="1152" /></p>
 </div>
 </div>
 
@@ -413,6 +415,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
