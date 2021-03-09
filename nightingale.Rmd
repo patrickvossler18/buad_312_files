@@ -21,8 +21,9 @@ library(buad312data)
 
 Modern method for displaying one numeric and one categorical variables over time
 ```{r}
-nightingale %>% ggplot(aes(x = date, y = number_of_deaths, fill = cause_of_death)) +
-    geom_bar(stat = "identity", position = "dodge") +
+nightingale %>% ggplot(aes(x = date, y = number_of_deaths, color = cause_of_death)) +
+    geom_line()+
+    # geom_bar(stat = "identity", position = "dodge") +
     scale_x_date(date_breaks = "1 month") +
     theme(axis.text.x=element_text(angle = -45, hjust = 0)) +
     geom_vline(xintercept = ymd("1855-04-01"), color = "red") +
@@ -30,6 +31,18 @@ nightingale %>% ggplot(aes(x = date, y = number_of_deaths, fill = cause_of_death
     annotate("text",x=ymd("1855-04-01"), label="The sanitation committee arrives", y=500, color = "red", vjust = -1, hjust = -0.05)+
     annotate("text",x=ymd("1854-11-01"), label="Nightingale arrives", y=500, color = "blue", vjust = -1, hjust = 1.1)
 ```
+
+
+<!-- ```{r} -->
+<!-- nightingale %>% ggplot(aes(x = date, y = number_of_deaths, fill = cause_of_death)) + -->
+<!--     geom_bar(stat = "identity", position = "dodge") + -->
+<!--     scale_x_date(date_breaks = "1 month") + -->
+<!--     theme(axis.text.x=element_text(angle = -45, hjust = 0)) + -->
+<!--     geom_vline(xintercept = ymd("1855-04-01"), color = "red") + -->
+<!--     geom_vline(xintercept = ymd("1854-11-01"), color = "blue") + -->
+<!--     annotate("text",x=ymd("1855-04-01"), label="The sanitation committee arrives", y=500, color = "red", vjust = -1, hjust = -0.05)+ -->
+<!--     annotate("text",x=ymd("1854-11-01"), label="Nightingale arrives", y=500, color = "blue", vjust = -1, hjust = 1.1) -->
+<!-- ``` -->
 
 
 ## Recreating Nightingale's rose diagrams using ggplot2's `coord_polar()` function.
