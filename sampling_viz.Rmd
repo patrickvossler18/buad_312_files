@@ -34,7 +34,7 @@ knitr::opts_chunk$set(echo = TRUE)
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
-    <li class="ball-placeholder"></li>
+  
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
@@ -44,7 +44,8 @@ knitr::opts_chunk$set(echo = TRUE)
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
-    <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
@@ -54,7 +55,8 @@ knitr::opts_chunk$set(echo = TRUE)
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
-    <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
@@ -64,16 +66,8 @@ knitr::opts_chunk$set(echo = TRUE)
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
-    <li class="ball-placeholder"></li>
   <li class="ball-placeholder"></li>
-  <li class="ball-placeholder"></li>
-  <li class="ball-placeholder"></li>
-  <li class="ball-placeholder"></li>
-  <li class="ball-placeholder"></li>
-  <li class="ball-placeholder"></li>
-  <li class="ball-placeholder"></li>
-  <li class="ball-placeholder"></li>
-  <li class="ball-placeholder"></li>
+  
 </ul>
 <ul class="lottery"></ul>
 <button class="next-ball">Draw Balls</button>
