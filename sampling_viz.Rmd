@@ -71,5 +71,5 @@ knitr::opts_chunk$set(echo = TRUE)
 </ul>
 <ul class="lottery"></ul>
 <button class="next-ball">Draw Balls</button>
-<button class="play-again">Draw Again!</button>
+<button class="play-again">Reset</button>
 <script src="sampling_viz.js"></script>
