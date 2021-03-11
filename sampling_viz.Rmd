@@ -1,0 +1,81 @@
+---
+title: "Sampling Visualization"
+author: "BUAD 312"
+date: "3/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="sampling_viz.css">
+
+
+<ul class="ball-placeholders">
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+    <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+    <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+    <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+    <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+  <li class="ball-placeholder"></li>
+</ul>
+<ul class="lottery"></ul>
+<button class="next-ball">Draw Balls</button>
+<button class="play-again">Draw Again!</button>
+<script src="sampling_viz.js"></script>

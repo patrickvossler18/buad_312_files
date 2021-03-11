@@ -10,6 +10,8 @@ navbar:
       href: overfitting.html
     - text: "Recreating the Nightingale Rose Diagram"
       href: nightingale.html
+    - text: "Sampling Visualization"
+      href: sampling_viz.html
 
 output_dir: "."
 output:
