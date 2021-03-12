@@ -18,18 +18,23 @@ function getRandomInt(min, max) {
 }
 
 var arr = new Array();
-var i = 1;
+var difference = new Array();
+var full_seq =  Array(50).fill().map((element, index) => index + 1);
+var full_seq = full_seq.map( function(value) {
+return value - 1;
+} );
+var j = 1;
 
 $('.next-ball').on('click', function(){
   var num_red = getBinomial(50,0.4);
   //console.log(num_red);
-  while(i <= num_red){
-      var random = getRandomInt(1, 50);
+  while(j <= num_red){
+      var random = getRandomInt(0, 49);
       if(arr.indexOf(random) >= 1){
         //console.log("got duplicate: " + random)
         while ( arr.indexOf(random) >= 1) {
           //console.log(random + ' has already been picked, go again.');
-          random = getRandomInt(1, 50);
+          random = getRandomInt(0, 49);
           if(arr.indexOf(random) < 1){
             break;
           }
@@ -37,11 +42,16 @@ $('.next-ball').on('click', function(){
 
       }
       arr.push(random);
-    i++
+    j++
   }
-//console.log(arr.length);
-  for(i= 0; i <= arr.length; i++){
+  difference = full_seq.filter(x => !arr.includes(x));
+console.log(difference);
+console.log(arr);
+  for(i= 0; i < arr.length; i++){
     $('.ball-placeholders').find('li:eq('+arr[i] +')').addClass('selected-ball').removeClass('ball-placeholder');
+  }
+  for(i= 0; i < difference.length; i++){
+    $('.ball-placeholders').find('li:eq('+difference[i] +')').addClass('not-selected-ball').removeClass('ball-placeholder');
   }
 
 
@@ -53,11 +63,15 @@ $('.next-ball').on('click', function(){
 });
 
 $('.play-again').on('click', function(){
-  for(i= 0; i <= arr.length; i++){
+  for(i= 0; i < arr.length; i++){
     $('.ball-placeholders').find('li:eq('+arr[i] +')').addClass('ball-placeholder').removeClass('selected-ball');
   }
+  for(i= 0; i < difference.length; i++){
+    $('.ball-placeholders').find('li:eq('+difference[i] +')').addClass('ball-placeholder').removeClass('not-selected-ball');
+  }
   arr = [];
-  i = 1;
+  difference = [];
+  j = 1;
   $('.next-ball').show();
   $('.play-again').hide();
 });
