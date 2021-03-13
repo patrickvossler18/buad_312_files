@@ -17,61 +17,70 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-var arr = new Array();
-var difference = new Array();
-var full_seq =  Array(50).fill().map((element, index) => index + 1);
-var full_seq = full_seq.map( function(value) {
-return value - 1;
-} );
-var j = 1;
-
-$('.next-ball').on('click', function(){
-  var num_red = getBinomial(50,0.4);
-  //console.log(num_red);
-  while(j <= num_red){
-      var random = getRandomInt(0, 49);
-      if(arr.indexOf(random) >= 1){
+function sample_array(arr, n){
+  var j = 0;
+  var sample_idx = new Array();
+  var sampled_obs = new Array();
+  
+  while(j < n){
+      var random = getRandomInt(0, arr.length);
+      if(sample_idx.indexOf(random) >= 1){
         //console.log("got duplicate: " + random)
-        while ( arr.indexOf(random) >= 1) {
+        while ( sample_idx.indexOf(random) >= 1) {
           //console.log(random + ' has already been picked, go again.');
-          random = getRandomInt(0, 49);
-          if(arr.indexOf(random) < 1){
+          random = getRandomInt(0, arr.length);
+          if(sample_idx.indexOf(random) < 1){
             break;
           }
+        }
       }
-
-      }
-      arr.push(random);
+      sample_idx.push(random);
     j++
   }
-  difference = full_seq.filter(x => !arr.includes(x));
-console.log(difference);
-console.log(arr);
-  for(i= 0; i < arr.length; i++){
-    $('.ball-placeholders').find('li:eq('+arr[i] +')').addClass('selected-ball').removeClass('ball-placeholder');
+  
+  for ( k = 0; k < sample_idx.length; k ++){
+      sampled_obs.push(arr[sample_idx[k]]);
   }
-  for(i= 0; i < difference.length; i++){
-    $('.ball-placeholders').find('li:eq('+difference[i] +')').addClass('not-selected-ball').removeClass('ball-placeholder');
-  }
+  return(sampled_obs)
+}
 
 
+//var arr = new Array();
+var blue = new Array(1500).fill(0);
+var red = new Array(900).fill(1);
+var arr = blue.concat(red);
+var sample = new Array();
+
+$('.next-ball').on('click', function(){
+  //var num_red = getBinomial(50,0.4);
+  //console.log(num_red);
+  //var srs = sample_from_array(arr, 50);
+  var srs = sample_array(arr, 50);
+  
+  for(i=0; i < srs.length; i++){
+    if(srs[i] === 1){
+      $('.ball-placeholders').find('li:eq('+ i +')').addClass('selected-ball').removeClass('ball-placeholder');
+    } else {
+      $('.ball-placeholders').find('li:eq('+ i +')').addClass('not-selected-ball').removeClass('ball-placeholder');
+    }
+    sample.push(srs[i]);
+  }
     $('.next-ball').hide();
     $('.play-again').show();
-
-
   
 });
 
 $('.play-again').on('click', function(){
-  for(i= 0; i < arr.length; i++){
-    $('.ball-placeholders').find('li:eq('+arr[i] +')').addClass('ball-placeholder').removeClass('selected-ball');
+  
+  for(i=0; i < sample.length; i++){
+    if(sample[i] === 1){
+      $('.ball-placeholders').find('li:eq('+ i +')').addClass('ball-placeholder').removeClass('selected-ball');
+    } else {
+      $('.ball-placeholders').find('li:eq('+ i +')').addClass('ball-placeholder').removeClass('not-selected-ball');
+    }
   }
-  for(i= 0; i < difference.length; i++){
-    $('.ball-placeholders').find('li:eq('+difference[i] +')').addClass('ball-placeholder').removeClass('not-selected-ball');
-  }
-  arr = [];
-  difference = [];
-  j = 1;
+  
+  sample = [];
   $('.next-ball').show();
   $('.play-again').hide();
 });
