@@ -2,18 +2,25 @@ name: "BUAD 312 Files"
 navbar:
   title: "HOME"
   left:
-    - text: "3d Regression Plot"
-      href: 3dplot.html
-    - text: "Regression with a Categorical Variable: Behind the Scenes"
-      href: model_matrix.html
-    - text: "Overfitting Plots"
-      href: overfitting.html
-    - text: "Recreating the Nightingale Rose Diagram"
-      href: nightingale.html
     - text: "Sampling Visualization"
       href: sampling_viz.html
     - text: "Permutation Test"
-      href: permutation_test/permutation_test.html
+      href: permutation_test/index.html
+    - text: "More"
+      icon: fa-gear
+      menu:
+      - text: "Regression"
+      - text: "3d Regression Plot"
+        href: 3dplot.html
+      - text: "Regression with a Categorical Variable: Behind the Scenes"
+        href: model_matrix.html
+      - text: "Overfitting Plots"
+        href: overfitting.html
+      - text: "---------"
+      - text: "Data Visualization"
+      - text: "Recreating the Nightingale Rose Diagram"
+        href: nightingale.html
+
 
 output_dir: "."
 output:
