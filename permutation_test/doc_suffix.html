@@ -1,0 +1,215 @@
+<section id='intro'>
+		<p class='intro__overline'>
+			March 2019 By <a href='https://twitter.com/jdwlbr'>Jared Wilber</a>, modified March 2021 for use in BUAD 312.
+		</p>
+		<h1 class='intro__hed'>The Permutation Test</h1>
+
+	</section>
+	<section id='scroll'>
+		<div class='scroll__graphic'>
+			<div class='chart'>
+				<svg id='svg' style="width:100%;height:100%;"></svg>
+
+			</div>
+		</div>
+		<div class='scroll__text'>
+			<div class='step' data-step='1'>
+
+
+			</div>
+			<div class='step' data-step='2'>
+
+			</div>
+
+			<div class='step' data-step='3'>
+
+			</div>
+			<div class='step' data-step='4'>
+
+			</div>
+			<div class='step' data-step='5'>
+
+			</div>
+			<div class='step' data-step='6'>
+
+			</div>
+			<div class='step' data-step='7'>
+
+			</div>
+			<div class='step' data-step='8'>
+
+			</div>
+			<div class='step finalStep' data-step='9'>
+
+			</div>
+			<div class='step finalStep' data-step='10'>
+		</div>
+	</section>
+	<section id='conclusion'>
+		<h2 class='subheader'> Conclusion</h2>
+		<p class='intro__bod'>
+
+			 To recap, the algorithm comprises three steps:</p>
+			<br>
+				<p class='intro__bod'>1). Determine & calculate the initial test-statistic.</p>
+				<p class='intro__bod'>2). Construct approximate test-statistic distribution.</p>
+				<p class='intro__bod'>3). Calculate the p-value.</p>
+			<br>
+
+		<p class='intro__bod'>
+		This is a modified version of Jared Wilber's amazing <a href="https://www.jwilber.me/permutationtest/">permutation test visualization</a>. We highly recommend checking out the original version, it has llamas!
+		</p>
+
+
+		</p>
+
+		<br><br><br><hr><br>
+		<h2 class='subheader'>References</h2>
+		<p class='intro__bod'>
+			<p class='intro__bod'><a href="https://www.wiley.com/en-us/Introduction+to+Design+and+Analysis+of+Experiments-p-9780470412169">Introduction to Design and Analysis of Experiments</a> (George W. Cobb, 1998)</p>
+			<p class='intro__bod'><a href="http://allendowney.blogspot.com/2011/05/there-is-only-one-test.html">There is only one test!</a> (Allen Downey, 2011)</p>
+			<p class='intro__bod'><a href="https://thomasleeper.com/Rcourse/Tutorials/permutationtests.html">Permutation Tests</a> (Thomas Leeper, 2013)</p>
+		</p>
+		<br><br>
+		<h2 class='subheader'>Resources</h2>
+		<p class='intro__bod'>
+			<p class='intro__bod'><a href="https://d3js.org/">D3.js</a> (Mike Bostock)</p>
+			<p class='intro__bod'><a href="https://roughjs.com/">Rough.js</a> (Preet Shihn)</p>
+			<p class='intro__bod'><a href="https://github.com/russellgoldenberg/scrollama">scrollama.js</a> (Russel Goldenberg)</p>
+		</p>
+			
+	</section>
+	<div class='debug'></div>
+	<script src=assets/scrollama.min.js></script>
+	<script>
+		// set seed so numbers are always the same
+		Math.seedrandom('seed');
+
+		var container = d3.select('#scroll');
+		var graphic = container.select('.scroll__graphic');
+		var chart = graphic.select('.chart');
+		var text = container.select('.scroll__text');
+		var step = text.selectAll('.step');
+
+
+		var scroller = scrollama();
+
+		// generic window resize listener event
+		function handleResize() {
+			// 1. update height of step elements
+			var stepHeight = Math.floor(window.innerHeight * 0.9); // was * .75
+			step.style('height', stepHeight + 'px');
+			// 2. update width/height of graphic element
+			var bodyWidth = d3.select('body').node().offsetWidth;
+			graphic
+				.style('width', bodyWidth + 'px')
+				.style('height', window.innerHeight + 'px');
+			var chartMargin = bodyWidth > 350 ? 32 : 10;
+			var textWidth = text.node().offsetWidth;
+			var chartWidth = graphic.node().offsetWidth - textWidth - chartMargin;
+			console.log('chartwidth:', chartWidth)
+			chart
+				.style('width', chartWidth + 'px')
+				.style('height', Math.floor(window.innerHeight / 1.2) + 'px');
+			// 3. tell scrollama to update new element dimensions
+			scroller.resize();
+		}
+
+		// scrollama event handlers
+		function handleStepEnter(response) {
+			// add color to current step only
+			step.classed('is-active', function (d, i) {
+				return i === response.index;
+			})
+
+			// console.log('response index:' + response.index)
+
+			if (response.index == 0 & response.direction == 'down') {
+				// console.log('0 down')
+				transitionZeroDown()
+			} else if (response.index == 0 & response.direction == 'up') {
+				// console.log('0 up')
+				transitionZeroUp()
+			}else if (response.index == 1 & response.direction == 'down') {
+				// console.log('1 down')
+				transitionOneDown()
+			} else if (response.index == 1 & response.direction == 'up') {
+				// console.log('1 up')
+				transitionOneUp()
+			} else if (response.index == 2 & response.direction == 'up') {
+				// console.log('2 up')
+                transitionTwoUp()
+           } else if (response.index == 2 & response.direction == 'down') {
+           	    // console.log('2 down')
+                transitionTwoDown()
+		   } else if (response.index == 3 & response.direction == 'up'){
+			   	// console.log('3 up')
+			   	transitionThreeUp()
+			   	moveNodes()
+		   } else if (response.index == 3 & response.direction == 'down'){
+		   		// console.log('3 down')
+		   		transitionThreeDown()
+		   } else if (response.index == 4 & response.direction == 'up'){
+			   	// console.log('4 up')
+			   	transitionFourUp()
+		   } else if (response.index == 4 & response.direction == 'down'){
+			   	// console.log('4 down')
+		   		transitionFourDown()
+		   } else if (response.index == 5 & response.direction == 'up'){
+			   	// console.log('5 up')
+			   	transitionFiveUp()
+		   } else if (response.index == 5 & response.direction == 'down'){
+			   	// console.log('5 down')
+			   	transitionFiveDown()
+		   } else if (response.index == 6 & response.direction == 'up'){
+			   	// console.log('6 up')
+			   	transitionSixUp()
+		   } else if (response.index == 6 & response.direction == 'down'){
+			   	// console.log('6 down')
+			   	transitionSixDown()
+		   } else if (response.index == 7 & response.direction == 'up'){
+			   	// console.log('7 up')
+			   	transitionSevenUp()
+		   } else if (response.index == 7 & response.direction == 'down'){
+			   	// console.log('7 down')
+			   	transitionSevenDown()
+		   } else if (response.index == 8 & response.direction == 'up'){
+			   	// console.log('8 up')
+			   	transitionEightUp()
+		   } else if (response.index == 8 & response.direction == 'down'){
+			   	// console.log('8 down')
+			   	transitionEightDown()
+		   } else {
+		   	console.log('else case, response index: ', response.index)
+		   }
+		 } 
+
+		function handleContainerEnter(response) {
+			graphic.classed('is-fixed', true);
+			graphic.classed('is-bottom', false);
+		}
+		function handleContainerExit(response) {
+			graphic.classed('is-fixed', false);
+			graphic.classed('is-bottom', response.direction === 'down');
+			if (response.direction === 'down') {
+				transitionExit()
+			}
+		}
+
+		function init() {
+			handleResize();
+			scroller.setup({
+				container: '#scroll',
+				graphic: '.scroll__graphic',
+				text: '.scroll__text',
+				step: '.scroll__text .step',
+				debug: false,
+			})
+				.onStepEnter(handleStepEnter)
+				.onContainerEnter(handleContainerEnter)
+				.onContainerExit(handleContainerExit);
+			window.addEventListener('resize', handleResize);
+		}
+		init();
+	</script>
+	<script src="js/permutationTest.js"></script>

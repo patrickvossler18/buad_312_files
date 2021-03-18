@@ -12,9 +12,12 @@ navbar:
       href: nightingale.html
     - text: "Sampling Visualization"
       href: sampling_viz.html
+    - text: "Permutation Test"
+      href: permutation_test/permutation_test.html
 
 output_dir: "."
 output:
   html_document:
     theme: yeti
     highlight: textmate
+    css : styles.css
