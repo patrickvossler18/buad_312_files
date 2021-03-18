@@ -205,7 +205,7 @@ var rc = rough.svg(svg);
 
 // d3.html("../assets/noun_28240_cc.svg", loadRoughsvgD3);
 // d3.html("assets/noun_28240_cc.svg", loadRoughsvgD3);
-d3.html("permutation_test/assets/person-alone-svgrepo-com.svg", loadRoughsvgD3);
+d3.html("assets/person-alone-svgrepo-com.svg", loadRoughsvgD3);
 
 function nodeRandomPos(d) {
   if (d.nodeGroup === "llama") {
