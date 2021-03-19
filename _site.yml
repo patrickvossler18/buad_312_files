@@ -2,24 +2,28 @@ name: "BUAD 312 Files"
 navbar:
   title: "HOME"
   left:
-    - text: "Sampling Visualization"
-      href: sampling_viz.html
+    - text: "Sampling"
+      menu:
+        - text: "Sampling From Bowl Visualization"
+          href: sampling_viz.html
+        - text: "Confidence Interval Bootstrap Visualization"
+          href: ci_bootstrap_app.html
+          # href: https://pvossler.shinyapps.io/ci_bootstrap_app/
     - text: "Permutation Test"
       href: permutation_test/index.html
-    - text: "More"
-      icon: fa-gear
+      
+    - text: "Regression"
       menu:
-      - text: "Regression"
       - text: "3d Regression Plot"
         href: 3dplot.html
       - text: "Regression with a Categorical Variable: Behind the Scenes"
         href: model_matrix.html
       - text: "Overfitting Plots"
         href: overfitting.html
-      - text: "---------"
-      - text: "Data Visualization"
-      - text: "Recreating the Nightingale Rose Diagram"
-        href: nightingale.html
+    - text: "Data Visualization"
+      menu:
+        - text: "Recreating the Nightingale Rose Diagram"
+          href: nightingale.html
 
 
 output_dir: "."

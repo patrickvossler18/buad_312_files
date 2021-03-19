@@ -11,7 +11,7 @@
 
 
 
-<title>Overfitting/Bias-variance tradeoff</title>
+<title>ci_bootstrap.utf8</title>
 
 <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -21,7 +21,6 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -258,9 +257,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -345,65 +341,13 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
 
 
-
-<h1 class="title toc-ignore">Overfitting/Bias-variance tradeoff</h1>
 
 </div>
 
 
-<pre class="r"><code># data setting taken from: https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html
-true_fun &lt;- function(x){
-    cos(1.5 * pi * x)
-}
-set.seed(12345)
-
-n_samples &lt;- 21
-
-
-x &lt;- runif(n_samples)
-y &lt;- true_fun(x) + runif(n_samples) * 0.12
-dat &lt;- tibble(x = x, y = y)</code></pre>
-<pre class="r"><code>dat %&gt;% ggplot(aes(x = x, y = y))  + 
-    geom_smooth(method = &quot;lm&quot;, se = F, aes(color = &quot;black&quot;))+
-    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,3), se = F, aes(color = &quot;red&quot;)) +
-    geom_point()+
-    scale_color_identity(guide = &quot;legend&quot;,
-                         name = &quot;Model Type&quot;,
-                         breaks = c(&quot;black&quot;, &quot;red&quot;),
-                         labels = c(&quot;Linear&quot;, &quot;Cubic&quot;))</code></pre>
-<p><img src="overfitting_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code>dat %&gt;% ggplot(aes(x = x, y = y))  + 
-    geom_smooth(method = &quot;lm&quot;, se = F, aes(color = &quot;black&quot;))+
-    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,3), se = F, aes(color = &quot;red&quot;))+
-    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,20, raw = T), se = F, aes(color = &quot;green&quot;))+
-    geom_point() +
-    scale_color_identity(guide = &quot;legend&quot;,
-                         name = &quot;Model Type&quot;,
-                         breaks = c(&quot;black&quot;, &quot;red&quot;, &quot;green&quot;),
-                         labels = c(&quot;Linear&quot;, &quot;Cubic&quot;, &quot;20-order Polynomial&quot;))</code></pre>
-<p><img src="overfitting_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<pre class="r"><code>dat %&gt;% ggplot(aes(x = x, y = y))  + 
-    geom_smooth(method = &quot;lm&quot;, se = F, aes(color = &quot;black&quot;))+
-    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,3), se = F, aes(color = &quot;red&quot;))+
-    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,20, raw = T), se = F, aes(color = &quot;green&quot;))+
-    geom_smooth(method = &quot;lm&quot;,formula = y ~ poly(x,2), se = F, aes(color = &quot;orange&quot;))+
-    geom_point() +
-    scale_color_identity(guide = &quot;legend&quot;,
-                         name = &quot;Model Type&quot;,
-                         breaks = c(&quot;black&quot;, &quot;red&quot;, &quot;green&quot;, &quot;orange&quot;),
-                         labels = c(&quot;Linear&quot;, &quot;Cubic&quot;, &quot;20-order Polynomial&quot;, &quot;Quadratic&quot;))</code></pre>
-<p><img src="overfitting_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code>knitr::include_app(&quot;https://pvossler.shinyapps.io/polynomials_plot/&quot;, height = &quot;600px&quot;)</code></pre>
-<iframe src="https://pvossler.shinyapps.io/polynomials_plot/?showcase=0" width="672" height="600px">
+<iframe src="https://pvossler.shinyapps.io/ci_bootstrap_app/?showcase=0" width="672" height="1000px">
 </iframe>
 
 
@@ -439,11 +383,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
