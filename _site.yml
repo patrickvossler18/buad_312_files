@@ -7,8 +7,7 @@ navbar:
         - text: "Sampling From Bowl Visualization"
           href: sampling_viz.html
         - text: "Confidence Interval Bootstrap Visualization"
-          href: ci_bootstrap_app.html
-          # href: https://pvossler.shinyapps.io/ci_bootstrap_app/
+          href: ci_bootstrap.html
     - text: "Permutation Test"
       href: permutation_test/index.html
       
