@@ -23,6 +23,8 @@ navbar:
       menu:
         - text: "Recreating the Nightingale Rose Diagram"
           href: nightingale.html
+    - text: "Number Guessing Survey"
+      href: number_guessing_survey.html
 
 
 output_dir: "."
