@@ -1,0 +1,28 @@
+---
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{css, echo=FALSE}
+.main-container {
+    max-width: 100% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+iframe {
+    width: 100%;
+}
+
+```
+
+
+```{r echo=FALSE}
+knitr::include_app("https://pvossler.shinyapps.io/number_guessing_survey/",height = "600px")
+```
+
