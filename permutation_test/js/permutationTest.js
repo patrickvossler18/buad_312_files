@@ -205,7 +205,8 @@ var rc = rough.svg(svg);
 
 // d3.html("../assets/noun_28240_cc.svg", loadRoughsvgD3);
 // d3.html("assets/noun_28240_cc.svg", loadRoughsvgD3);
-d3.html("assets/person-alone-svgrepo-com.svg", loadRoughsvgD3);
+// d3.html("assets/person-alone-svgrepo-com.svg", loadRoughsvgD3);
+d3.html("assets/american-football-svgrepo-com.svg", loadRoughsvgD3);
 
 function nodeRandomPos(d) {
   if (d.nodeGroup === "llama") {
@@ -392,7 +393,7 @@ const treatmentTitleCenter = trtCenter;
 const controlTitleCenter = cntrlCenter;
 let treatmentTitle = svgD3
   .append("text")
-  .html("TREATMENT")
+  .html("PATRIOTS")
   .attr("x", trtCenter - 30)
   .attr("y", width > mobileWidth ? margin : margin * 6.05)
   .attr("class", "groupTitle")
@@ -401,7 +402,7 @@ let treatmentTitle = svgD3
   .attr("visibility", "hidden");
 let controlTitle = svgD3
   .append("text")
-  .html("CONTROL")
+  .html("COLTS")
   .attr("x", controlTitleCenter)
   .attr("y", width > mobileWidth ? margin : margin * 6.05)
   .attr("class", "groupTitle")
