@@ -543,6 +543,12 @@ function initRoughDistribution() {
     .selectAll("path")
     .style("fill", "pink")
     .style("opacity", 1);
+
+  d3.selectAll('.response1')
+    .selectAll("path")
+    .style("fill", "red")
+    .style("opacity", 1);
+
 }
 
 function transitionZeroUp() {
@@ -797,6 +803,12 @@ function transitionSixUp() {
   d3.selectAll(".distributionCircleG.extreme")
     .selectAll("path")
     .style("fill", "pink");
+
+  d3.selectAll('.response1')
+    .selectAll("path")
+    .style("fill", "red")
+    .style("opacity", 1);
+
 }
 
 // hacky way to ensure smallest node keeps relative size (idk why this is a problem, but this solves it!)
@@ -841,6 +853,10 @@ function transitionSevenDown() {
       "transform",
       `scale(${distributionDotScale}, ${distributionDotScale})`
     );
+    d3.selectAll('.response1')
+    .selectAll("path")
+    .style("fill", "red")
+    .style("opacity", 1);
 }
 
 function transitionSevenUp() {
@@ -872,7 +888,7 @@ function transitionEightDown() {
     .attr("x", width > mobileWidth ? 25 : 15)
     .attr("y", width > mobileWidth ? 35 : 20)
     .attr("class", "finalText")
-    .text("n = 16")
+    .text("n = 16") // shouldn't this be 15?
     .attr("font-family", "Gaegu")
     .attr("font-size", 0)
     .attr("font-weight", "bold")
