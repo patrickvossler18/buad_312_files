@@ -8,8 +8,6 @@ navbar:
           href: sampling_viz.html
         - text: "Confidence Interval Bootstrap Visualization"
           href: ci_bootstrap.html
-    - text: "Permutation Test"
-      href: permutation_test/index.html
       
     - text: "Regression"
       menu:
@@ -25,6 +23,8 @@ navbar:
           href: nightingale.html
     - text: "Number Guessing Survey"
       href: number_guessing_survey.html
+    - text: "Permutation Test"
+      href: permutation_test/index.html
 
 
 output_dir: "."
